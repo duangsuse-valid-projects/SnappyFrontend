@@ -7,6 +7,9 @@
 extern crate libc;
 extern crate core;
 
+/// A fast compressor/decompressor
+///
+/// Snappy is a compression/decompression library. It does not aim for maximum compression, or compatibility with any other compression library; instead, it aims for very high speeds and reasonable compression.
 mod snappy;
 
 use libc::{printf, fprintf, open};
@@ -48,9 +51,12 @@ pub unsafe extern "C" fn _main(argc: i32, argv: *const [*const i8]) -> i32 {
   return 0;
 }
 
+/// Zip a set of file
 pub unsafe extern "C" fn snappy_zip(num: i32, pathes: *const [*const i8]) {
 }
 
+
+/// Unzip a snappy zipped file
 pub unsafe extern "C" fn snappy_unzip(input: *const i8, output: i32) {
 }
 
