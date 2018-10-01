@@ -13,7 +13,8 @@ use libc::printf;
 use core::panic::PanicInfo;
 
 #[no_mangle]
-pub extern "C" fn main(argc: i32, argv: *const *const u8) -> i32 {
+pub unsafe extern "C" fn _main(argc: i32, argv: *const *const u8) -> i32 {
+  printf("Hello, world!\n".as_ptr() as *const i8);
   return 0;
 }
 

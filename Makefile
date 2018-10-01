@@ -14,10 +14,13 @@ ifeq ($(DEBUG), 1) # use debug info
 endif
 
 # outputs
-OUTPUTS := libsnappy.so libsnappy.rlib test docs
+OUTPUTS := libsnappy.so libsnappy.rlib test docs snappy
 
 # begin rules
-all: libsnappy.so
+all: snappy
+
+snappy: libsnappy.so main.c
+	$(CC) $(CFLAGS) $? -o $@
 
 test: test.rs
 	$(RUSTC) $(RUSTCFLAGS) $? --test -o $@
