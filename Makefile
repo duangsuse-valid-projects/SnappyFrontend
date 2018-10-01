@@ -31,9 +31,9 @@ run-test: test
 clean:
 	$(RM) -r $(OUTPUTS)
 
-docs: main.rs
+docs: main.rs snappy.rs
 	@ mkdir docs
-	$(RUSTDOC) $(RUSTDOCFLAGS) $? -o $@
+	for i in $?; do $(RUSTDOC) $(RUSTDOCFLAGS) $$i -o $@; done
 
 libsnappy.a: main.rs
 	$(RUSTC) $(RUSTCFLAGS) $? --crate-type staticlib --crate-name snappy
