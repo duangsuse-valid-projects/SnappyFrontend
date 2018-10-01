@@ -4,8 +4,6 @@
 #![feature(libc)]
 #![no_core]
 
-#![feature(start)]
-
 extern crate libc;
 extern crate core;
 
@@ -14,7 +12,7 @@ use core::panic::PanicInfo;
 
 #[no_mangle]
 pub unsafe extern "C" fn _main(argc: i32, argv: *const *const u8) -> i32 {
-  printf("Hello, world!\n".as_ptr() as *const i8);
+  printf("Hello, world!\n\00".as_ptr() as *const i8);
   return 0;
 }
 
