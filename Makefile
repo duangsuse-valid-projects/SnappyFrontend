@@ -14,10 +14,10 @@ ifeq ($(DEBUG), 1) # use debug info
 endif
 
 # outputs
-OUTPUTS := snappy libsnappy.rlib test docs
+OUTPUTS := libsnappy.so libsnappy.rlib test docs
 
 # begin rules
-all: snappy
+all: libsnappy.so
 
 test: test.rs
 	$(RUSTC) $(RUSTCFLAGS) $? --test -o $@
@@ -32,8 +32,8 @@ docs: main.rs
 	@ mkdir docs
 	$(RUSTDOC) $(RUSTDOCFLAGS) $? -o $@
 
-snappy: main.rs
-	$(RUSTC) $(RUSTCFLAGS) $? --crate-type cdylib --crate-name $@
+libsnappy.so: main.rs
+	$(RUSTC) $(RUSTCFLAGS) $? --crate-type cdylib --crate-name snappy
 
 libsnappy.rlib: snappy.rs
 	$(RUSTC) $(RUSTCFLAGS) $? --crate-type rlib --crate-name snappy

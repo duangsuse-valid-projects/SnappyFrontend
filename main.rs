@@ -1,18 +1,29 @@
 #![feature(lang_items)]
+#![feature(no_core)]
+
 #![feature(libc)]
 #![no_core]
 
+#![feature(start)]
+
+extern crate libc;
+extern crate core;
+
 use libc::printf;
+use core::panic::PanicInfo;
 
 #[no_mangle]
-pub extern "C" fn main() -> i32 {
+pub extern "C" fn main(argc: i32, argv: *const *const u8) -> i32 {
   return 0;
 }
 
 #[lang = "eh_personality"]
-extern "C" fn eh_personality() {}
+#[no_mangle]
+pub extern "C" fn eh_personality() {}
 
-#[lang = "panic_fmt"]
-fn panic_fmt() -> ! {
-  loop {}
+#[panic_handler]
+#[no_mangle]
+pub extern "C" fn panic_handler(p: &PanicInfo) -> ! {
+  loop {} // never return
 }
+
